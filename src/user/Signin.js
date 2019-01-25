@@ -28,12 +28,12 @@ class Signin extends Component {
             password
         };
         console.log(user);
-        this.signin(user).then(data => {
+        signin(user).then(data => {
             if (data.error) {
                 this.setState({ error: data.error, loading: false });
             } else {
                 // authenticate
-                this.authenticate(data, () => {
+                authenticate(data, () => {
                     this.setState({ redirectToReferer: true });
                 });
             }
