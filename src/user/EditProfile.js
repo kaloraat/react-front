@@ -156,7 +156,9 @@ class EditProfile extends Component {
         }
 
         const photoUrl = id
-            ? `${process.env.REACT_APP_API_URL}/user/photo/${id}`
+            ? `${
+                  process.env.REACT_APP_API_URL
+              }/user/photo/${id}?${new Date().getTime()}`
             : DefaultProfile;
 
         return (
@@ -177,7 +179,13 @@ class EditProfile extends Component {
                     ""
                 )}
 
-                <img src={photoUrl} alt={name} />
+                <img
+                    style={{ height: "200px", width: "auto" }}
+                    className="img-thumbnail"
+                    src={photoUrl}
+                    onError={i => (i.target.src = `${DefaultProfile}`)}
+                    alt={name}
+                />
 
                 {this.signupForm(name, email, password)}
             </div>
