@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { isAuthenticated } from "../auth";
-import { read } from "./apiUser";
+import { read, update } from "./apiUser";
+import { Redirect } from "react-router-dom";
 
 class EditProfile extends Component {
     constructor() {
@@ -9,7 +10,8 @@ class EditProfile extends Component {
             id: "",
             name: "",
             email: "",
-            password: ""
+            password: "",
+            redirectToProfile: false
         };
     }
 
@@ -17,12 +19,13 @@ class EditProfile extends Component {
         const token = isAuthenticated().token;
         read(userId, token).then(data => {
             if (data.error) {
-                this.setState({ redirectToSignin: true });
+                this.setState({ redirectToProfile: true });
             } else {
                 this.setState({
                     id: data._id,
                     name: data.name,
-                    email: data.email
+                    email: data.email,
+                    error: ""
                 });
             }
         });
@@ -43,20 +46,19 @@ class EditProfile extends Component {
         const user = {
             name,
             email,
-            password
+            password: password || undefined
         };
-        console.log(user);
-        // signup(user).then(data => {
-        //     if (data.error) this.setState({ error: data.error });
-        //     else
-        //         this.setState({
-        //             error: "",
-        //             name: "",
-        //             email: "",
-        //             password: "",
-        //             open: true
-        //         });
-        // });
+        // console.log(user);
+        const userId = this.props.match.params.userId;
+        const token = isAuthenticated().token;
+
+        update(userId, token, user).then(data => {
+            if (data.error) this.setState({ error: data.error });
+            else
+                this.setState({
+                    redirectToProfile: true
+                });
+        });
     };
 
     signupForm = (name, email, password) => (
@@ -98,7 +100,12 @@ class EditProfile extends Component {
     );
 
     render() {
-        const { name, email, password } = this.state;
+        const { id, name, email, password, redirectToProfile } = this.state;
+
+        if (redirectToProfile) {
+            return <Redirect to={`/user/${id}`} />;
+        }
+
         return (
             <div className="container">
                 <h2 className="mt-5 mb-5">Edit Profile</h2>
