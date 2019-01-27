@@ -15,7 +15,8 @@ class EditProfile extends Component {
             redirectToProfile: false,
             error: "",
             fileSize: 0,
-            loading: false
+            loading: false,
+            about: ""
         };
     }
 
@@ -29,7 +30,8 @@ class EditProfile extends Component {
                     id: data._id,
                     name: data.name,
                     email: data.email,
-                    error: ""
+                    error: "",
+                    about: ""
                 });
             }
         });
@@ -93,7 +95,7 @@ class EditProfile extends Component {
         }
     };
 
-    signupForm = (name, email, password) => (
+    signupForm = (name, email, password, about) => (
         <form>
             <div className="form-group">
                 <label className="text-muted">Profile Photo</label>
@@ -122,6 +124,17 @@ class EditProfile extends Component {
                     value={email}
                 />
             </div>
+
+            <div className="form-group">
+                <label className="text-muted">About</label>
+                <textarea
+                    onChange={this.handleChange("about")}
+                    type="text"
+                    className="form-control"
+                    value={about}
+                />
+            </div>
+
             <div className="form-group">
                 <label className="text-muted">Password</label>
                 <input
@@ -148,7 +161,8 @@ class EditProfile extends Component {
             password,
             redirectToProfile,
             error,
-            loading
+            loading,
+            about
         } = this.state;
 
         if (redirectToProfile) {
@@ -187,7 +201,7 @@ class EditProfile extends Component {
                     alt={name}
                 />
 
-                {this.signupForm(name, email, password)}
+                {this.signupForm(name, email, password, about)}
             </div>
         );
     }
