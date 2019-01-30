@@ -28,7 +28,7 @@ class Profile extends Component {
     };
 
     clickFollowButton = callApi => {
-        const userId = this.props.match.params.userId;
+        const userId = isAuthenticated().user._id;
         const token = isAuthenticated().token;
 
         callApi(userId, token, this.state.user._id).then(data => {
