@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { isAuthenticated } from "../auth";
 import { create } from "./apiPost";
 import { Redirect } from "react-router-dom";
-import DefaultProfile from "../images/avatar.jpg";
 
 class NewPost extends Component {
     constructor() {
@@ -62,12 +61,11 @@ class NewPost extends Component {
                 if (data.error) this.setState({ error: data.error });
                 else {
                     this.setState({
+                        loading: false,
                         title: "",
                         body: "",
-                        loading: false,
                         redirectToProfile: true
                     });
-                    console.log("New Post: ", data);
                 }
             });
         }
@@ -76,7 +74,7 @@ class NewPost extends Component {
     newPostForm = (title, body) => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Post Photo</label>
+                <label className="text-muted">Profile Photo</label>
                 <input
                     onChange={this.handleChange("photo")}
                     type="file"
