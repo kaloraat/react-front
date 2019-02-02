@@ -79,7 +79,17 @@ class ProfileTabs extends Component {
                     <div className="col-md-4">
                         <h3 className="text-primary">Posts</h3>
                         <hr />
-                        {JSON.stringify(posts)}
+                        {posts.map((post, i) => (
+                            <div key={i}>
+                                <div>
+                                    <Link to={`/post/${post._id}`}>
+                                        <div>
+                                            <p className="lead">{post.title}</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
