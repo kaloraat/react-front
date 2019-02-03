@@ -33,6 +33,15 @@ class SinglePost extends Component {
         });
     };
 
+    deleteConfirmed = () => {
+        let answer = window.confirm(
+            "Are you sure you want to delete your account?"
+        );
+        if (answer) {
+            this.deletePost();
+        }
+    };
+
     renderPost = post => {
         const posterId = post.postedBy ? `/user/${post.postedBy._id}` : "";
         const posterName = post.postedBy ? post.postedBy.name : " Unknown";
@@ -74,7 +83,7 @@ class SinglePost extends Component {
                                     Update Post
                                 </button>
                                 <button
-                                    onClick={this.deletePost}
+                                    onClick={this.deleteConfirmed}
                                     className="btn btn-raised btn-danger"
                                 >
                                     Delete Post
