@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { singlePost, update } from "./apiPost";
 import { isAuthenticated } from "../auth";
 import { Redirect } from "react-router-dom";
+import DefaultPost from "../images/mountains.jpg";
 
 class EditPost extends Component {
     constructor() {
@@ -40,7 +41,7 @@ class EditPost extends Component {
 
     isValid = () => {
         const { title, body, fileSize } = this.state;
-        if (fileSize > 100000) {
+        if (fileSize > 1000000) {
             this.setState({
                 error: "File size should be less than 100kb",
                 loading: false
@@ -127,7 +128,14 @@ class EditPost extends Component {
     );
 
     render() {
-        const { title, body, redirectToProfile } = this.state;
+        const {
+            id,
+            title,
+            body,
+            redirectToProfile,
+            error,
+            loading
+        } = this.state;
 
         if (redirectToProfile) {
             return <Redirect to={`/user/${isAuthenticated().user._id}`} />;
@@ -136,6 +144,32 @@ class EditPost extends Component {
         return (
             <div className="container">
                 <h2 className="mt-5 mb-5">{title}</h2>
+
+                <div
+                    className="alert alert-danger"
+                    style={{ display: error ? "" : "none" }}
+                >
+                    {error}
+                </div>
+
+                {loading ? (
+                    <div className="jumbotron text-center">
+                        <h2>Loading...</h2>
+                    </div>
+                ) : (
+                    ""
+                )}
+
+                <img
+                    style={{ height: "200px", width: "auto" }}
+                    className="img-thumbnail"
+                    src={`${
+                        process.env.REACT_APP_API_URL
+                    }/post/photo/${id}?${new Date().getTime()}`}
+                    onError={i => (i.target.src = `${DefaultPost}`)}
+                    alt={title}
+                />
+
                 {this.editPostForm(title, body)}
             </div>
         );
