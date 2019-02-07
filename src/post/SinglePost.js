@@ -94,7 +94,23 @@ class SinglePost extends Component {
                     }}
                 />
 
-                <h3 onClick={this.likeToggle}>{likes} Like</h3>
+                {like ? (
+                    <h3 onClick={this.likeToggle}>
+                        <i
+                            className="fa fa-thumbs-up text-success bg-dark"
+                            style={{ padding: "10px", borderRadius: "50%" }}
+                        />{" "}
+                        {likes} Like
+                    </h3>
+                ) : (
+                    <h3 onClick={this.likeToggle}>
+                        <i
+                            className="fa fa-thumbs-up text-warning bg-dark"
+                            style={{ padding: "10px", borderRadius: "50%" }}
+                        />{" "}
+                        {likes} Like
+                    </h3>
+                )}
 
                 <p className="card-text">{post.body}</p>
                 <br />
