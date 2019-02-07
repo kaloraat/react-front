@@ -74,7 +74,7 @@ class NewPost extends Component {
     newPostForm = (title, body) => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Profile Photo</label>
+                <label className="text-muted">Post Photo</label>
                 <input
                     onChange={this.handleChange("photo")}
                     type="file"
