@@ -73,7 +73,7 @@ class Posts extends Component {
     };
 
     render() {
-        const { posts } = this.state;
+        const { posts, page } = this.state;
         return (
             <div className="container">
                 <h2 className="mt-5 mb-5">
