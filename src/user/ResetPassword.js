@@ -21,7 +21,7 @@ class ResetPassword extends Component {
         }).then(data => {
             if (data.error) {
                 console.log(data.error);
-                this.setState({ error: data.error });
+                this.setState({ error: data.error, newPassword: "" });
             } else {
                 console.log(data.message);
                 this.setState({ message: data.message, newPassword: "" });
@@ -41,7 +41,9 @@ class ResetPassword extends Component {
                     <h4 className="bg-warning">{this.state.error}</h4>
                 )}
 
-                <form>
+                <form
+                    style={{ display: this.state.message.length ? "none" : "" }}
+                >
                     <div className="form-group mt-5">
                         <input
                             type="password"
