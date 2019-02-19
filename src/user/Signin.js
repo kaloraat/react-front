@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Recaptcha from "react-recaptcha";
+// import Recaptcha from "react-recaptcha";
 import { Link, Redirect } from "react-router-dom";
 import { signin, authenticate } from "../auth";
 import SocialLogin from "./SocialLogin";
@@ -17,7 +17,7 @@ class Signin extends Component {
         };
     }
 
-    callback = () => console.log("Recaptcha loaded...");
+    // callback = () => console.log("Recaptcha loaded...");
 
     // verifyCallback = () => {
     //     if(this.state.isVerified) {
@@ -27,9 +27,9 @@ class Signin extends Component {
     //     }
     // }
 
-    verifyCallback = response => {
-        console.log(response);
-    };
+    // verifyCallback = response => {
+    //     console.log(response);
+    // };
 
     handleChange = name => event => {
         this.setState({ error: "" });
@@ -79,12 +79,12 @@ class Signin extends Component {
                 />
             </div>
 
-            <Recaptcha
+            {/*<Recaptcha
                 sitekey="6LfkYZIUAAAAAKX-6C9kSX4vy6SFHJcAHhBLw30S"
                 render="explicit"
                 verifyCallback={this.verifyCallback}
                 onloadCallback={this.callback}
-            />
+            />*/}
 
             <button
                 onClick={this.clickSubmit}
