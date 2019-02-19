@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Recaptcha from "react-recaptcha";
+import { Recaptcha } from "react-recaptcha";
 import { signin, authenticate } from "../auth";
 import SocialLogin from "./SocialLogin";
 
