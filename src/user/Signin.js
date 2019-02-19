@@ -145,7 +145,6 @@ class Signin extends Component {
 
                 <hr />
                 <br />
-                <br />
 
                 <div
                     className="alert alert-danger"

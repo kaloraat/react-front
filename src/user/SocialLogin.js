@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import GoogleLogin from "react-google-login";
 import { socialLogin, authenticate } from "../auth";
 
 class SocialLogin extends Component {
@@ -43,7 +42,7 @@ class SocialLogin extends Component {
 
         return (
             <GoogleLogin
-                clientId="679380407525-2cvoah9gpsjjffc5k1p6atahhf2vqfl4.apps.googleusercontent.com"
+                clientId="114364230972-qae87cs9orqi3c874atsg6aujd28n9r6.apps.googleusercontent.com"
                 buttonText="Login with Google"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
