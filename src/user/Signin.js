@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { signin, authenticate } from "../auth";
 import SocialLogin from "./SocialLogin";
+import Recaptcha from "react-recaptcha";
 
 class Signin extends Component {
     constructor() {
@@ -11,9 +12,24 @@ class Signin extends Component {
             password: "",
             error: "",
             redirectToReferer: false,
-            loading: false
+            loading: false,
+            isVerified: false
         };
     }
+
+    callback = () => console.log("Recaptcha loaded...");
+
+    // verifyCallback = () => {
+    //     if(this.state.isVerified) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
+
+    verifyCallback = response => {
+        console.log(response);
+    };
 
     handleChange = name => event => {
         this.setState({ error: "" });
@@ -22,6 +38,7 @@ class Signin extends Component {
 
     clickSubmit = event => {
         event.preventDefault();
+
         this.setState({ loading: true });
         const { email, password } = this.state;
         const user = {
@@ -61,6 +78,14 @@ class Signin extends Component {
                     value={password}
                 />
             </div>
+
+            <Recaptcha
+                sitekey="6LfkYZIUAAAAAKX-6C9kSX4vy6SFHJcAHhBLw30S"
+                render="explicit"
+                verifyCallback={this.verifyCallback}
+                onloadCallback={this.callback}
+            />
+
             <button
                 onClick={this.clickSubmit}
                 className="btn btn-raised btn-primary"
