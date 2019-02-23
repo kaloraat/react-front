@@ -155,6 +155,32 @@ class SinglePost extends Component {
                                 </button>
                             </>
                         )}
+
+                    <div>
+                        {isAuthenticated().user &&
+                            isAuthenticated().user.role === "admin" && (
+                                <div class="card mt-5">
+                                    <div className="card-body">
+                                        <h5 className="card-title">Admin</h5>
+                                        <p className="mb-2 text-danger">
+                                            Edit/Delete as an Admin
+                                        </p>
+                                        <Link
+                                            to={`/post/edit/${post._id}`}
+                                            className="btn btn-raised btn-warning btn-sm mr-5"
+                                        >
+                                            Update Post
+                                        </Link>
+                                        <button
+                                            onClick={this.deleteConfirmed}
+                                            className="btn btn-raised btn-danger"
+                                        >
+                                            Delete Post
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                    </div>
                 </div>
             </div>
         );
