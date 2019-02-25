@@ -8,15 +8,13 @@ class Posts extends Component {
         super();
         this.state = {
             posts: [],
-            page: 1,
-            noMorePosts: false
+            page: 1
         };
     }
 
     loadPosts = page => {
         list(page).then(data => {
             if (data.error) {
-                this.setState({ noMorePosts: true });
                 console.log(data.error);
             } else {
                 this.setState({ posts: data });
