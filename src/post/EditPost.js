@@ -24,7 +24,7 @@ class EditPost extends Component {
                 this.setState({ redirectToProfile: true });
             } else {
                 this.setState({
-                    id: data._id,
+                    id: data.postedBy._id,
                     title: data.title,
                     body: data.body,
                     error: ""
