@@ -4,7 +4,7 @@
 
 ### To run this project, do the following:
 
-##### create .env with the following code (update credentials)
+##### create .env with the following code (update credentials). Make sure to create .env in the root of the project, not inside /src. react-front/.env
 
 ```
 REACT_APP_API_URL=http://localhost:8080/api
