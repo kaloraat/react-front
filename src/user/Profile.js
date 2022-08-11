@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { isAuthenticated } from "../auth";
-import { Redirect, Link } from "react-router-dom";
-import { read } from "./apiUser";
-import DefaultProfile from "../images/avatar.jpg";
-import DeleteUser from "./DeleteUser";
-import FollowProfileButton from "./FollowProfileButton";
-import ProfileTabs from "./ProfileTabs";
-import { listByUser } from "../post/apiPost";
+import React, { Component } from 'react';
+import { isAuthenticated } from '../auth';
+import { Redirect, Link } from 'react-router-dom';
+import { read } from './apiUser';
+import DefaultProfile from '../images/avatar.jpg';
+import DeleteUser from './DeleteUser';
+import FollowProfileButton from './FollowProfileButton';
+import ProfileTabs from './ProfileTabs';
+import { listByUser } from '../post/apiPost';
 
 class Profile extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class Profile extends Component {
       user: { following: [], followers: [] },
       redirectToSignin: false,
       following: false,
-      error: "",
+      error: '',
       posts: []
     };
   }
@@ -82,9 +82,7 @@ class Profile extends Component {
     if (redirectToSignin) return <Redirect to="/signin" />;
 
     const photoUrl = user._id
-      ? `${process.env.REACT_APP_API_URL}/user/photo/${
-          user._id
-        }?${new Date().getTime()}`
+      ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}?${new Date().getTime()}`
       : DefaultProfile;
 
     return (
@@ -93,7 +91,7 @@ class Profile extends Component {
         <div className="row">
           <div className="col-md-4">
             <img
-              style={{ height: "200px", width: "auto" }}
+              style={{ height: '200px', width: 'auto' }}
               className="img-thumbnail"
               src={photoUrl}
               onError={i => (i.target.src = `${DefaultProfile}`)}
@@ -108,51 +106,34 @@ class Profile extends Component {
               <p>{`Joined ${new Date(user.created).toDateString()}`}</p>
             </div>
 
-            {isAuthenticated().user &&
-            isAuthenticated().user._id === user._id ? (
+            {isAuthenticated().user && isAuthenticated().user._id === user._id ? (
               <div className="d-inline-block">
-                <Link
-                  className="btn btn-raised btn-info mr-5"
-                  to={`/post/create`}
-                >
+                <Link className="btn btn-raised btn-info mr-5" to={`/post/create`}>
                   Create Post
                 </Link>
 
-                <Link
-                  className="btn btn-raised btn-success mr-5"
-                  to={`/user/edit/${user._id}`}
-                >
+                <Link className="btn btn-raised btn-success mr-5" to={`/user/edit/${user._id}`}>
                   Edit Profile
                 </Link>
                 <DeleteUser userId={user._id} />
               </div>
             ) : (
-              <FollowProfileButton
-                following={this.state.following}
-                onButtonClick={this.clickFollowButton}
-              />
+              <FollowProfileButton following={this.state.following} onButtonClick={this.clickFollowButton} />
             )}
 
             <div>
-              {isAuthenticated().user &&
-                isAuthenticated().user.role === "admin" && (
-                  <div class="card mt-5">
-                    <div className="card-body">
-                      <h5 className="card-title">Admin</h5>
-                      <p className="mb-2 text-danger">
-                        Edit/Delete as an Admin
-                      </p>
-                      <Link
-                        className="btn btn-raised btn-success mr-5"
-                        to={`/user/edit/${user._id}`}
-                      >
-                        Edit Profile
-                      </Link>
-                      {/*<DeleteUser userId={user._id} />*/}
-                      <DeleteUser />
-                    </div>
+              {isAuthenticated().user && isAuthenticated().user.role === 'admin' && (
+                <div class="card mt-5">
+                  <div className="card-body">
+                    <h5 className="card-title">Admin</h5>
+                    <p className="mb-2 text-danger">Edit/Delete as an Admin</p>
+                    <Link className="btn btn-raised btn-success mr-5" to={`/user/edit/${user._id}`}>
+                      Edit Profile
+                    </Link>
+                    <DeleteUser userId={user._id} />
                   </div>
-                )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -162,11 +143,7 @@ class Profile extends Component {
             <p className="lead">{user.about}</p>
             <hr />
 
-            <ProfileTabs
-              followers={user.followers}
-              following={user.following}
-              posts={posts}
-            />
+            <ProfileTabs followers={user.followers} following={user.following} posts={posts} />
           </div>
         </div>
       </div>
